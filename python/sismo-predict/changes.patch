@@ -1,0 +1,19 @@
+diff --git a/python/sismo-predict/Procfile b/python/sismo-predict/Procfile
+new file mode 100644
+index 0000000..450e89a
+--- /dev/null
++++ b/python/sismo-predict/Procfile
+@@ -0,0 +1 @@
++web: python -m uvicorn api:app --host 0.0.0.0 --port $PORT
+diff --git a/python/sismo-predict/requirements.txt b/python/sismo-predict/requirements.txt
+index f67e5e5..81226e3 100644
+--- a/python/sismo-predict/requirements.txt
++++ b/python/sismo-predict/requirements.txt
+@@ -1,4 +1,7 @@
++fastapi>=0.104.0
++uvicorn[standard]>=0.24.0
+ requests>=2.25.0
+ numpy>=1.20.0
+ pandas>=1.2.0
+ sgp4>=2.20
++python-multipart>=0.0.5

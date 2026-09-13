@@ -1,0 +1,299 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    🚀 FLUJO DE DESPLIEGUE - PORTAFOLIO 2025               ║
+║                                                                             ║
+║                          Tiempo total: 4 horas                             ║
+║                          Pasos: 14 principales                             ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+FASE 1: PREPARACIÓN (30 minutos)
+════════════════════════════════════════════════════════════════════════════════
+
+    📥 Descargar archivos
+    │
+    ├─ INICIO_AQUI.md
+    ├─ CHECKLIST_VISUAL_DESPLIEGUE.md ← Tu guía principal
+    ├─ TARJETA_REFERENCIA_RAPIDA.md   ← Consulta frecuente
+    ├─ index_ACTUALIZADO.html         ← Tu portfolio (renombra a index.html)
+    └─ generar_archivos_proyectos.sh  ← Script automático
+    │
+    ✅ Completado
+
+
+FASE 2: GITHUB REPOSITORY (1 hora)
+════════════════════════════════════════════════════════════════════════════════
+
+    🌐 GitHub: https://github.com/new
+    │
+    ├─ 1. Crear repositorio "portafolio-2025"
+    │      │
+    │      └─ ✅ https://github.com/mbigliam/portafolio-2025
+    │
+    ├─ 2. Clonar repositorio
+    │      │
+    │      ├─ git clone https://github.com/mbigliam/portafolio-2025.git
+    │      └─ cd portafolio-2025
+    │
+    ├─ 3. Crear estructura de carpetas
+    │      │
+    │      ├─ java/
+    │      │   ├── smarttask-web/
+    │      │   └── biblioteca-untec/
+    │      ├─ python/
+    │      │   ├── jarvis/
+    │      │   ├── sismo-predict/
+    │      │   └── unir-pdf/
+    │      └─ web/
+    │          ├── wallet2/
+    │          ├── meet-coffe/
+    │          └── viajes-chile/
+    │
+    ├─ 4. Copiar archivos de configuración
+    │      │
+    │      ├─ Opción A: Ejecutar script
+    │      │   ./generar_archivos_proyectos.sh .
+    │      │
+    │      └─ Opción B: Copiar manualmente
+    │          - requirements.txt (Python)
+    │          - Procfile (todos)
+    │          - .gitignore (todos)
+    │          - README.md (todos)
+    │
+    ├─ 5. Copiar portfolio HTML
+    │      │
+    │      ├─ index.html (renombrado)
+    │      ├─ assets/ (CSS, JS, imágenes)
+    │      ├─ CV_2026_2_MauricioFernando_BigliaMaldonado.pdf
+    │      └─ README.md maestro
+    │
+    └─ 6. Primer push a GitHub
+           │
+           ├─ git add .
+           ├─ git commit -m "Initial commit: Portfolio structure"
+           └─ git push -u origin main
+              │
+              └─ ✅ Visible en GitHub: https://github.com/mbigliam/portafolio-2025
+
+
+FASE 3: GITHUB PAGES (30 minutos)
+════════════════════════════════════════════════════════════════════════════════
+
+    ⚙️ GitHub Settings
+    │
+    ├─ 1. Ir a: https://github.com/mbigliam/portafolio-2025/settings
+    │
+    ├─ 2. En el menú: Pages
+    │
+    ├─ 3. Configurar:
+    │      │
+    │      ├─ Source: "Deploy from a branch"
+    │      ├─ Branch: main
+    │      └─ Folder: / (root)
+    │
+    ├─ 4. Save
+    │
+    └─ 5. Esperar 2-3 minutos
+           │
+           └─ ✅ Portfolio disponible en: https://mbigliam.github.io/portafolio-2025/
+
+
+FASE 4: DESPLIEGUE EN RENDER - PYTHON (1 hora)
+════════════════════════════════════════════════════════════════════════════════
+
+    🐍 JARVIS
+    ├─ Dashboard Render → New + → Web Service
+    ├─ Seleccionar: portafolio-2025 (repositorio GitHub)
+    ├─ Name: jarvis-app
+    ├─ Root Directory: python/jarvis
+    ├─ Runtime: Python 3
+    ├─ Build: pip install -r requirements.txt
+    ├─ Start: (automático desde Procfile)
+    └─ ✅ URL: https://jarvis-app.onrender.com
+
+    🐍 SISMO-PREDICT
+    ├─ Dashboard Render → New + → Web Service
+    ├─ Seleccionar: portafolio-2025
+    ├─ Name: sismo-predict
+    ├─ Root Directory: python/sismo-predict
+    ├─ Runtime: Python 3
+    ├─ Build: pip install -r requirements.txt
+    ├─ Start: (automático desde Procfile)
+    └─ ✅ URL: https://sismo-predict.onrender.com
+
+    ❌ UNIR-PDF
+    └─ No desplegar (aplicación de escritorio)
+
+
+FASE 5: DESPLIEGUE EN RENDER - JAVA (1 hora)
+════════════════════════════════════════════════════════════════════════════════
+
+    ☕ SMARTTASK-WEB
+    ├─ Dashboard Render → New + → Web Service
+    ├─ Seleccionar: portafolio-2025
+    ├─ Name: smarttask-web
+    ├─ Root Directory: java/smarttask-web
+    ├─ Runtime: Java
+    ├─ Build: mvn clean package
+    ├─ Start: (automático desde Procfile)
+    └─ ✅ URL: https://smarttask-web.onrender.com
+
+    ☕ BIBLIOTECA-UNTEC
+    ├─ Dashboard Render → New + → Web Service
+    ├─ Seleccionar: portafolio-2025
+    ├─ Name: biblioteca-untec
+    ├─ Root Directory: java/biblioteca-untec
+    ├─ Runtime: Java
+    ├─ Build: mvn clean package
+    ├─ Start: (automático desde Procfile)
+    └─ ✅ URL: https://biblioteca-untec.onrender.com
+
+
+FASE 6: DESPLIEGUE EN RENDER - WEB ESTÁTICO (30 minutos)
+════════════════════════════════════════════════════════════════════════════════
+
+    🌐 WALLET2
+    ├─ Dashboard Render → New + → Static Site
+    ├─ Seleccionar: portafolio-2025
+    ├─ Name: wallet2
+    ├─ Root Directory: web/wallet2
+    ├─ Publish Directory: . (punto)
+    └─ ✅ URL: https://wallet2.onrender.com
+
+    🌐 MEET-COFFE
+    ├─ Dashboard Render → New + → Static Site
+    ├─ Seleccionar: portafolio-2025
+    ├─ Name: meet-coffe
+    ├─ Root Directory: web/meet-coffe
+    ├─ Publish Directory: . (punto)
+    └─ ✅ URL: https://meet-coffe.onrender.com
+
+    🌐 VIAJES-CHILE
+    ├─ Dashboard Render → New + → Static Site
+    ├─ Seleccionar: portafolio-2025
+    ├─ Name: viajes-chile
+    ├─ Root Directory: web/viajes-chile
+    ├─ Publish Directory: . (punto)
+    └─ ✅ URL: https://viajes-chile.onrender.com
+
+
+FASE 7: VERIFICACIÓN FINAL (30 minutos)
+════════════════════════════════════════════════════════════════════════════════
+
+    🔍 Tests
+    │
+    ├─ ✅ GitHub Pages carga
+    │     └─ https://mbigliam.github.io/portafolio-2025/
+    │
+    ├─ ✅ Portfolio se ve bien
+    │     ├─ Todos los 8 proyectos visibles
+    │     ├─ Imágenes cargan correctamente
+    │     └─ CV es descargable
+    │
+    ├─ ✅ Links a GitHub funcionan
+    │     ├─ SmartTask-Web → GitHub ✅
+    │     ├─ BibliotecaUNTEC → GitHub ✅
+    │     ├─ JARVIS → GitHub ✅
+    │     ├─ SISMO-PREDICT → GitHub ✅
+    │     ├─ UNIR-PDF → GitHub ✅
+    │     ├─ Wallet2 → GitHub ✅
+    │     ├─ Meet-Coffe → GitHub ✅
+    │     └─ Viajes-Chile → GitHub ✅
+    │
+    └─ ✅ Demos en Render funcionan
+          ├─ SmartTask-Web → Render ✅
+          ├─ BibliotecaUNTEC → Render ✅
+          ├─ JARVIS → Render ✅
+          ├─ SISMO-PREDICT → Render ✅
+          ├─ Wallet2 → Render ✅
+          ├─ Meet-Coffe → Render ✅
+          └─ Viajes-Chile → Render ✅
+
+
+RESULTADO FINAL
+════════════════════════════════════════════════════════════════════════════════
+
+    ✨ PORTFOLIO PROFESIONAL ✨
+
+    🌐 GitHub Pages
+       └─ https://mbigliam.github.io/portafolio-2025/
+
+    📂 Repositorio GitHub
+       └─ https://github.com/mbigliam/portafolio-2025
+
+    🚀 8 Proyectos Desplegados
+       ├─ ☕ SmartTask-Web
+       ├─ ☕ BibliotecaUNTEC
+       ├─ 🐍 JARVIS
+       ├─ 🐍 SISMO-PREDICT
+       ├─ 🐍 UNIR-PDF (desktop)
+       ├─ 🌐 Wallet2
+       ├─ 🌐 Meet-Coffe
+       └─ 🌐 Viajes-Chile
+
+    📊 Estadísticas
+       ├─ Proyectos: 8
+       ├─ Repositorios: 1
+       ├─ Servicios Render: 7 (+ 1 desktop)
+       ├─ Links funcionales: 16 (GitHub + Demo)
+       └─ Tiempo invertido: 4 horas
+
+
+COMPARTIR CON EMPLEADORES
+════════════════════════════════════════════════════════════════════════════════
+
+    📌 Mi Portafolio Profesional
+    https://mbigliam.github.io/portafolio-2025/
+
+    📂 Código Fuente
+    https://github.com/mbigliam/portafolio-2025
+
+    📧 Contacto
+    mauriciobigliam@gmail.com
+
+
+RESUMEN DE COMANDOS PRINCIPALES
+════════════════════════════════════════════════════════════════════════════════
+
+    Git:
+    ─────
+    git clone https://github.com/mbigliam/portafolio-2025.git
+    cd portafolio-2025
+    git add .
+    git commit -m "Initial commit: Portfolio structure"
+    git push -u origin main
+
+    Script automático (opcional):
+    ─────────────────────────────
+    chmod +x generar_archivos_proyectos.sh
+    ./generar_archivos_proyectos.sh .
+
+    GitHub Pages:
+    ────────────
+    Settings → Pages → Deploy from main branch → /root
+
+
+TIMELINE SUGERIDO
+════════════════════════════════════════════════════════════════════════════════
+
+    HOY - 1 hora
+    ├─ Leer documentación
+    └─ Descargar archivos
+
+    MAÑANA - 2 horas
+    ├─ Crear GitHub repo
+    ├─ Copiar archivos
+    └─ Primer push
+
+    PASADO MAÑANA - 2 horas
+    ├─ Habilitar GitHub Pages
+    └─ Desplegar en Render (7 servicios)
+
+    LUEGO - 30 min
+    ├─ Verificar todo funciona
+    ├─ Actualizar index.html si es necesario
+    └─ ¡Listo para compartir!
+
+
+════════════════════════════════════════════════════════════════════════════════
+¡TÚ PUEDES! 🚀
+════════════════════════════════════════════════════════════════════════════════

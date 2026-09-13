@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mauricio Biglia | Systems Analyst & Full Stack Java Developer</title>
+    <meta name="description"
+        content="Portafolio profesional de Mauricio Biglia - Analista de Sistemas y Desarrollador Full Stack Java con más de 10 años de experiencia. 8 proyectos destacados en Java, Python y Web.">
+    <meta name="keywords"
+        content="Mauricio Biglia, Full Stack Developer, Java, Python, Spring Boot, Systems Analyst, Chile, Portafolio">
+    <meta name="author" content="Mauricio Biglia">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mauricio Biglia | Systems Analyst & Full Stack Java Developer">
+    <meta property="og:description"
+        content="Portafolio profesional con 8 proyectos - Desarrollador Full Stack con más de 10 años de experiencia">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/icons/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Canvas Background para Hero -->
+    <canvas id="particleCanvas"></canvas>
+    <canvas id="blurCanvasTop" class="blur-canvas"></canvas>
+    <canvas id="blurCanvasBottom" class="blur-canvas"></canvas>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-logo">&lt;/&gt;</div>
+            <div class="loader-text">Cargando portafolio...</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#inicio">
+                <span class="brand-code">&lt;/&gt;</span>
+                <span class="brand-name">Mauricio<span class="text-accent">Biglia</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-2">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Sobre mí</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Habilidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experiencia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Formación</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-contact" href="#contact">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100 g-5">
+                <div class="col-lg-7 order-2 order-lg-1">
+                    <div class="hero-content">
+                        <div class="hero-badge mb-4 reveal-item">
+                            <span class="status-dot"></span>
+                            <span>Disponible para nuevos proyectos</span>
+                        </div>
+                        <h1 class="hero-title reveal-item">
+                            Hola, soy <span class="text-gradient">Mauricio Biglia</span>
+                        </h1>
+                        <div class="typing-container reveal-item">
+                            <span class="typing-prefix">&gt; </span>
+                            <span id="typing-text" class="typing-text"></span>
+                            <span class="typing-cursor">|</span>
+                        </div>
+                        <p class="hero-description reveal-item">
+                            Construyo soluciones de software robustas y escalables. Más de <strong>10 años</strong> de
+                            experiencia combinando infraestructura TI con desarrollo moderno en <strong>Java, Python y
+                                arquitecturas web</strong>.
+                        </p>
+                        <div class="hero-buttons reveal-item">
+                            <a href="#projects" class="btn btn-primary-custom">
+                                <i class="fas fa-rocket me-2"></i>Ver Proyectos
+                            </a>
+                            <a href="CV_2026_2_MauricioFernando_BigliaMaldonado.pdf" download
+                                class="btn btn-outline-custom">
+                                <i class="fas fa-download me-2"></i>Descargar CV
+                            </a>
+                            <a href="#contact" class="btn btn-ghost-custom">
+                                <i class="fas fa-envelope me-2"></i>Contacto
+                            </a>
+                        </div>
+                        <div class="hero-social reveal-item">
+                            <span class="social-label">Sígueme:</span>
+                            <a href="https://github.com/mbigliam" target="_blank" class="social-link"
+                                aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/mbiglia" target="_blank" class="social-link"
+                                aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:mauriciobigliam@gmail.com" class="social-link" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2">
+                    <div class="hero-image-container reveal-item">
+                        <div class="hero-image-wrapper">
+                            <div class="hero-image-ring"></div>
+                            <div class="hero-image-ring ring-2"></div>
+                            <img src="assets/img/yo.png" alt="Mauricio Biglia - Systems Analyst & Full Stack Developer"
+                                class="hero-image">
+                            <div class="hero-image-badge badge-code">
+                                <i class="fas fa-code"></i>
+                                <span>Full Stack</span>
+                            </div>
+                            <div class="hero-image-badge badge-java">
+                                <i class="fab fa-java"></i>
+                                <span>Java</span>
+                            </div>
+                            <div class="hero-image-badge badge-python">
+                                <i class="fab fa-python"></i>
+                                <span>Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header reveal-item">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">Sobre Mí</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 reveal-item">
+                    <div class="about-content">
+                        <p class="about-text">
+                            Soy <strong>Analista de Sistemas</strong> titulado por el Instituto Profesional Providencia
+                            (IPP), con más de <strong>10 años de trayectoria</strong> en la gestión, soporte y
+                            optimización de infraestructura tecnológica y redes corporativas en Chile.
+                        </p>
+                        <p class="about-text">
+                            Mi especialización actual abarca el desarrollo <strong>Full Stack Java</strong> y
+                            <strong>Python</strong>. Disfruto trabajando en el diseño de arquitecturas limpias,
+                            automatización de procesos operativos y control de calidad de software.
+                        </p>
+                        <p class="about-text">
+                            He liderado proyectos tecnológicos críticos para instituciones públicas .
+                        </p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="10">0</div>
+                                <div class="stat-label">Años Experiencia</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="30">0</div>
+                                <div class="stat-label">Proyectos</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="15">0</div>
+                                <div class="stat-label">Certificaciones</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-target="100">0</div>
+                                <div class="stat-label">% Compromiso</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 reveal-item">
+                    <div class="about-cards">
+                        <div class="about-card">
+                            <div class="about-card-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h4>Desarrollo Full Stack</h4>
+                            <p>Java, Spring Boot, Python, React, Angular</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-card-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h4>Infraestructura TI</h4>
+                            <p>Linux, Windows, Zabbix, GLPI, Redes</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-card-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>Bases de Datos</h4>
+                            <p>PostgreSQL, MySQL, SQL Server</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-card-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4>Cloud & DevOps</h4>
+                            <p>Azure, Git, CI/CD, Automatización</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="skills" class="section skills-section">
+        <div class="container">
+            <div class="section-header reveal-item">
+                <span class="section-number">02.</span>
+                <h2 class="section-title">Tecnologías & Habilidades</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Stack tecnológico que domino</p>
+            </div>
+            <div class="skills-grid">
+                <!-- Backend -->
+                <div class="skill-category reveal-item">
+                    <h3 class="category-title">
+                        <i class="fas fa-server"></i> Backend
+                    </h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <i class="fab fa-java skill-icon" style="color: #f89820;"></i>
+                            <span>Java</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-leaf skill-icon" style="color: #6db33f;"></i>
+                            <span>Spring Boot</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-cubes skill-icon" style="color: #6db33f;"></i>
+                            <span>Spring Framework</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-file-code skill-icon" style="color: #e76f00;"></i>
+                            <span>JSP</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-server skill-icon" style="color: #5382a1;"></i>
+                            <span>Java Servlets</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-building skill-icon" style="color: #007396;"></i>
+                            <span>Jakarta EE / JEE</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-python skill-icon" style="color: #3776ab;"></i>
+                            <span>Python</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-node-js skill-icon" style="color: #339933;"></i>
+                            <span>Node.js</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend -->
+                <div class="skill-category reveal-item">
+                    <h3 class="category-title">
+                        <i class="fas fa-palette"></i> Frontend
+                    </h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <i class="fab fa-html5 skill-icon" style="color: #e34f26;"></i>
+                            <span>HTML5</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt skill-icon" style="color: #1572b6;"></i>
+                            <span>CSS3</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js skill-icon" style="color: #f7df1e;"></i>
+                            <span>JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-bootstrap skill-icon" style="color: #7952b3;"></i>
+                            <span>Bootstrap</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="93%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database -->
+                <div class="skill-category reveal-item">
+                    <h3 class="category-title">
+                        <i class="fas fa-database"></i> Bases de Datos
+                    </h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <i class="fas fa-database skill-icon" style="color: #336791;"></i>
+                            <span>PostgreSQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database skill-icon" style="color: #4479a1;"></i>
+                            <span>MySQL</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database skill-icon" style="color: #cc2927;"></i>
+                            <span>SQL Server</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database skill-icon" style="color: #336791;"></i>
+                            <span>H2 Database</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps & Tools -->
+                <div class="skill-category reveal-item">
+                    <h3 class="category-title">
+                        <i class="fas fa-tools"></i> DevOps & Tools
+                    </h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <i class="fab fa-git-alt skill-icon" style="color: #f05032;"></i>
+                            <span>Git</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-github skill-icon" style="color: #fff;"></i>
+                            <span>GitHub</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-linux skill-icon" style="color: #fcc624;"></i>
+                            <span>Linux</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-windows skill-icon" style="color: #0078d4;"></i>
+                            <span>Windows</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-cloud skill-icon" style="color: #0078d4;"></i>
+                            <span>Azure</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="78%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-docker skill-icon" style="color: #2496ed;"></i>
+                            <span>Docker</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiencia -->
+    <section id="experience" class="section experience-section">
+        <div class="container">
+            <div class="section-header reveal-item">
+                <span class="section-number">03.</span>
+                <h2 class="section-title">Experiencia Profesional</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Mi trayectoria laboral</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Analista de Sistemas e Infraestructura TI</h3>
+                            <span class="timeline-company">APIUX Tecnología</span>
+                            <span class="timeline-date">Enero 2021 - Junio 2026</span>
+                        </div>
+                        <p>Prestación de servicios tecnológicos para organismos públicos (Archivo Nacional, INAPI,
+                            DIPRES). Administración de GLPI, implementación de Zabbix, desarrollo de herramientas
+                            internas con Python, React y PostgreSQL.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">React</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">GLPI</span>
+                            <span class="tag">Zabbix</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Técnico en Informática</h3>
+                            <span class="timeline-company">Aligare</span>
+                            <span class="timeline-date">2020 - 2021</span>
+                        </div>
+                        <p>Soporte tecnológico especializado para el Instituto de Previsión Social (IPS) y mantención de
+                            infraestructura crítica.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">Soporte TI</span>
+                            <span class="tag">Infraestructura</span>
+                            <span class="tag">Helpdesk</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Técnico Informático & Analista SOC</h3>
+                            <span class="timeline-company">ITQ Latam</span>
+                            <span class="timeline-date">2018 - 2019</span>
+                        </div>
+                        <p>Monitoreo de seguridad, supervisión de firewalls y soporte para Metro S.A.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">Ciberseguridad</span>
+                            <span class="tag">Firewalls</span>
+                            <span class="tag">SOC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Técnico Informático</h3>
+                            <span class="timeline-company">Entel Contact Center & SONDA S.A.</span>
+                            <span class="timeline-date">2006 - 2016</span>
+                        </div>
+                        <p>Soporte remoto especializado, redes corporativas LAN/WAN, diagnóstico y resolución de
+                            problemas.</p>
+                        <div class="timeline-tags">
+                            <span class="tag">Redes</span>
+                            <span class="tag">Soporte Técnico</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS - ACTUALIZADO CON 8 PROYECTOS REALES -->
+    <section id="projects" class="section projects-section">
+        <div class="container">
+            <div class="section-header reveal-item">
+                <span class="section-number">04.</span>
+                <h2 class="section-title">Proyectos Destacados</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">8 aplicaciones y sistemas desarrollados</p>
+            </div>
+            <div class="projects-grid">
+
+                <!-- Proyecto 1: SmartTask-Web -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="SmartTask Web">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/java/smarttask-web" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://smarttask-web.onrender.com/smarttask/" target="_blank" class="project-link" title="Ver demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Java/Spring Boot
+                        </div>
+                        <h3>SmartTask Web</h3>
+                        <p>Aplicación web de gestión de tareas con interfaz moderna. Sistema CRUD completo con herencia JPA, discriminadores y validación de negocio.</p>
+                        <div class="project-tech">
+                            <span>Java 17</span>
+                            <span>Spring Boot 3.2.5</span>
+                            <span>JSP</span>
+                            <span>H2 Database</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/java/smarttask-web" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://smarttask-web.onrender.com/smarttask/" target="_blank" class="btn-project btn-demo">
+                                <i class="fas fa-play"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2: BibliotecaUNTEC -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80" alt="Biblioteca UNTEC">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/java/biblioteca-untec" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://biblioteca-untec.onrender.com/" target="_blank" class="project-link" title="Ver demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Java/Spring Boot
+                        </div>
+                        <h3>Sistema Biblioteca UNTEC</h3>
+                        <p>Sistema completo de gestión bibliotecaria con módulos de catalogación, préstamos y reportes. Arquitectura MVC escalable con base de datos relacional.</p>
+                        <div class="project-tech">
+                            <span>Java</span>
+                            <span>Spring Boot</span>
+                            <span>JSP</span>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/java/biblioteca-untec" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://biblioteca-untec.onrender.com/" target="_blank" class="btn-project btn-demo">
+                                <i class="fas fa-play"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 3: JARVIS -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://i.pinimg.com/564x/ac/66/da/ac66dad71fd575dfecb76d281222d47a.jpg" alt="JARVIS IA">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/jarvis" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://jarvis-app.onrender.com/" target="_blank" class="project-link" title="Ver demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Python/IA
+                        </div>
+                        <h3>JARVIS - Asistente IA</h3>
+                        <p>Asistente de voz e inteligencia artificial con integración con Ollama y Gemini. Sistema modular con soporte para procesamiento de lenguaje natural y ejecución de tareas.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Ollama</span>
+                            <span>Gemini API</span>
+                            <span>FastAPI</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/jarvis" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://jarvis-app.onrender.com/" target="_blank" class="btn-project btn-demo">
+                                <i class="fas fa-play"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4: SISMO-PREDICT -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://i.postimg.cc/tTQHLmpL/SISMO-PREDICT-B-AUTO.png" alt="SISMO Predict">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/sismo-predict" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://sismo-predict.onrender.com/" target="_blank" class="project-link" title="Ver demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Python/Data
+                        </div>
+                        <h3>SISMO-PREDICT B-AUTO</h3>
+                        <p>Sistema de predicción y monitoreo de sismos con análisis de datos en tiempo real. API Flask con frontend interactivo y base de datos de eventos sísmicos.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>HTML/CSS/JS</span>
+                            <span>API REST</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/sismo-predict" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://sismo-predict.onrender.com/" target="_blank" class="btn-project btn-demo">
+                                <i class="fas fa-play"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 5: Wallet2 -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://i.postimg.cc/Vv0nd63j/wallet.png" alt="Wallet Digital">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/web/wallet2" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://wallet2.onrender.com/" target="_blank" class="project-link" title="Ver demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Frontend
+                        </div>
+                        <h3>Billetera Digital Wallet</h3>
+                        <p>Aplicación interactiva de gestión de transacciones y control monetario. Interfaz moderna con múltiples vistas (login, menú, depósitos, envíos, transacciones).</p>
+                        <div class="project-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Bootstrap</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/web/wallet2" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://wallet2.onrender.com/" target="_blank" class="btn-project btn-demo">
+                                <i class="fas fa-play"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 6: Meet Coffe -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://i.postimg.cc/nLxkgv6t/cafe.png" alt="Meet Coffe">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/web/meet-coffe" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://meet-coffe.onrender.com/" target="_blank" class="project-link" title="Ver demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Frontend
+                        </div>
+                        <h3>Meet Coffe Sitio Web</h3>
+                        <p>Sitio web corporativo de cafetería con diseño responsivo. Showcasing de productos, galería de imágenes y sección de contacto con animaciones.</p>
+                        <div class="project-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Font Awesome</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/web/meet-coffe" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://meet-coffe.onrender.com/" target="_blank" class="btn-project btn-demo">
+                                <i class="fas fa-play"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 7: Viajes Chile -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://i.postimg.cc/851ZJhHS/viajechile.png" alt="Viajes Chile">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/web/viajes-chile" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://viajes-chile.onrender.com/" target="_blank" class="project-link" title="Ver demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Frontend
+                        </div>
+                        <h3>Viajes Chile - Turismo</h3>
+                        <p>Portal turístico de destinos en Chile con galería de atractivos, paquetes de viajes e información sobre paisajes. Diseño elegante e informativo.</p>
+                        <div class="project-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Bootstrap 5</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/web/viajes-chile" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://viajes-chile.onrender.com/" target="_blank" class="btn-project btn-demo">
+                                <i class="fas fa-play"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 8: UNIR PDF -->
+                <div class="project-card reveal-item">
+                    <div class="project-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvnEFNkfP6N4JBySJd6ZBYhZeMJi3MhdyKn4rHXwx4Nw&s=10" alt="Unir PDF">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/unir-pdf" target="_blank" class="project-link" title="Ver código">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" onclick="alert('Aplicación de escritorio - Ver en GitHub')" class="project-link" title="Aplicación Local">
+                                    <i class="fas fa-desktop"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-featured">
+                            <i class="fas fa-star"></i> Python/Desktop
+                        </div>
+                        <h3>UNIR PDF - Utilidad</h3>
+                        <p>Herramienta de escritorio para fusionar múltiples archivos PDF en uno solo. Compilada como ejecutable (.exe) con interfaz gráfica para usuarios no técnicos.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>PyInstaller</span>
+                            <span>PDF Processing</span>
+                            <span>Desktop GUI</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/unir-pdf" target="_blank" class="btn-project">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="#" onclick="alert('Aplicación de escritorio - Disponible en repositorio')" class="btn-project btn-demo">
+                                <i class="fas fa-code-branch"></i> Código
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Formación -->
+    <section id="education" class="section education-section">
+        <div class="container">
+            <div class="section-header reveal-item">
+                <span class="section-number">05.</span>
+                <h2 class="section-title">Formación & Certificaciones</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Educación y aprendizaje continuo</p>
+            </div>
+            <div class="education-grid">
+                <div class="education-card main-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Título Profesional</h3>
+                    <h4>Analista de Sistemas</h4>
+                    <p class="education-place">Instituto Profesional Providencia (IPP)</p>
+                    <p class="education-location"><i class="fas fa-map-marker-alt"></i> Santiago, Chile</p>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h3>IT Automation with Python</h3>
+                    <p class="education-place">Google / Talento Digital Chile</p>
+                    <span class="education-year">2026</span>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h3>Advanced Data Analytics</h3>
+                    <p class="education-place">Google / Talento Digital Chile</p>
+                    <span class="education-year">2026</span>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h3>UX Design</h3>
+                    <p class="education-place">Google / Talento Digital Chile</p>
+                    <span class="education-year">2026</span>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p class="education-place">Caja Los Andes / Talento Digital</p>
+                    <span class="education-year">2026</span>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>IT Support</h3>
+                    <p class="education-place">Caja Los Andes / +Protección</p>
+                    <span class="education-year">2026</span>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Full Stack Java</h3>
+                    <p class="education-place">Bootcamp Especialización</p>
+                    <span class="education-year">2025</span>
+                </div>
+
+                <div class="education-card reveal-item">
+                    <div class="education-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Full Stack Front-End</h3>
+                    <p class="education-place">Bootcamp Especialización</p>
+                    <span class="education-year">2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header reveal-item">
+                <span class="section-number">06.</span>
+                <h2 class="section-title">¿Hablamos?</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">¿Tienes un proyecto en mente? Envíame un mensaje</p>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-5 reveal-item">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:mauriciobigliam@gmail.com">mauriciobigliam@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <a href="tel:+56950214433">+56 9 5021 4433</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Ubicación</h4>
+                                <p>Santiago, Chile</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div>
+                                <h4>Disponibilidad</h4>
+                                <p>Híbrido / Remoto</p>
+                            </div>
+                        </div>
+                        <div class="contact-social">
+                            <a href="https://github.com/mbigliam" target="_blank" class="contact-social-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/mbiglia" target="_blank" class="contact-social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 reveal-item">
+                    <form id="contactForm" class="contact-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" id="nombre" class="form-control" placeholder="Tu nombre"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" placeholder="tu@correo.com"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="asunto">Asunto</label>
+                                    <input type="text" id="asunto" class="form-control" placeholder="Asunto del mensaje"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="mensaje">Mensaje</label>
+                                    <textarea id="mensaje" class="form-control" rows="5"
+                                        placeholder="Escribe tu mensaje aquí..." required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-submit">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-code">&lt;/&gt;</span>
+                    <span>Mauricio Biglia</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#about">Sobre mí</a>
+                    <a href="#projects">Proyectos</a>
+                    <a href="#contact">Contacto</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/mbigliam" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/mbiglia" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:mauriciobigliam@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="footer-bottom">
+                    <p>Diseñado y desarrollado por <strong>Mauricio Biglia</strong> © 2026</p>
+                    <p class="footer-tagline">Systems Analyst | Full Stack Java Developer</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Volver Arriba -->
+    <button id="scrollToTopBtn" class="scroll-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallet - Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f7fa;
+  }
+
+  .login-panel {
+    background: #f7f8fa;
+    min-height: 100vh;
+    padding: 60px;
+    border-radius: 0 40px 40px 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .logo-wallet {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0d6efd;
+    margin-bottom: 40px;
+  }
+
+  .welcome-text {
+    color: #0a2c70;
+    margin-bottom: 30px;
+    line-height: 1.3;
+  }
+
+  .form-control {
+    height: 55px;
+    border-radius: 12px;
+  }
+
+  .btn-login {
+    height: 55px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .help-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+  }
+
+  .help-box {
+    margin-top: 40px;
+    background: #eef1f6;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .help-box h5 {
+    margin-bottom: 15px;
+    color: #1b2a4a;
+  }
+
+  .help-box a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .hero-panel {
+    min-height: 100vh;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, .35)),
+      url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .promo-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 420px;
+    background: rgba(20, 20, 20, .75);
+    backdrop-filter: blur(10px);
+    color: white;
+    border-radius: 25px;
+    padding: 25px;
+  }
+
+  .promo-card h3 {
+    margin-bottom: 15px;
+  }
+
+  .promo-card p {
+    color: #d9d9d9;
+  }
+
+  .promo-card button {
+    border-radius: 30px;
+  }
+
+  /* Tablets */
+  @media (max-width: 991px) {
+
+    .hero-panel {
+      display: none;
+    }
+
+    .login-panel {
+      border-radius: 0;
+      padding: 30px;
+    }
+
+    .help-box {
+      margin-bottom: 30px;
+    }
+  }
+
+  /* Celulares */
+  @media (max-width: 576px) {
+
+    .login-panel {
+      padding: 20px;
+    }
+
+    .logo-wallet {
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .welcome-text {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .help-box {
+      padding: 20px;
+    }
+  }
+
+  /* Monitores grandes */
+  @media (min-width: 1400px) {
+
+    .login-panel {
+      padding: 80px;
+    }
+
+    .promo-card {
+      max-width: 500px;
+      padding: 35px;
+    }
+  }
+</style>
+  
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- LOGIN -->
+      <section class="col-lg-5 login-panel d-flex align-items-center">
+
+
+        <div class="w-100">
+
+          <div class="logo-wallet">
+            💳 Wallet Digital
+          </div>
+
+
+
+          <h2 class="welcome-text">
+            Bienvenido a tu Billetera Digital <br/>
+            <br/>
+            Inicio de sesión
+          </h2>
+      
+          <div id="x" class="mb-3">
+            
+          </div>
+          <div id="alert-container"></div>
+
+          <form id="loginForm">
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="email" placeholder="user:admin@ad" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">
+                Contraseña
+              </label>
+
+              <input type="password" class="form-control" id="password" placeholder="clave:admin" required>
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-login">
+                INICIAR SESION
+              </button>
+            </div>
+
+            <div class="help-link">
+              ¿Problemas con tu clave?
+              <a href="#">Recupérala aquí</a>
+            </div>
+
+          </form>
+
+          <div class="help-box">
+
+            <h5>¿Necesitas ayuda?</h5>
+
+            <p>
+              Si tienes problemas para acceder a tu cuenta,
+              comunícate con nuestro centro de soporte.
+            </p>
+
+            <div class="row text-center mt-3">
+
+              <div class="col-6">
+                <strong>Soporte</strong><br>
+                123  123 123
+              </div>
+
+              <div class="col-6">
+                <strong>Emergencias</strong><br>
+              123 123 123
+              </div>
+
+            </div>
+
+            <div class="mt-4">
+              <a href="#">
+                IR AL CENTRO DE AYUDA
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </section>
+      <!-- FIN DE LOGIN -->
+
+
+      <!-- PANEL DERECHO -->
+
+      <section class="col-lg-7 hero-panel">
+
+
+        <div class="promo-card">
+
+          <h3>
+            Administra tu dinero de forma inteligente
+          </h3>
+
+          <p>
+            Consulta tus movimientos, transfiere fondos,
+            paga servicios y controla tus gastos desde
+            cualquier lugar.
+          </p>
+
+          <div class="d-grid mt-4">
+            <button class="btn btn-light">
+              Conocer más
+            </button>
+          </div>
+
+        </div>
+
+
+      </section>
+      <!-- FIN PANEL DERECHO -->
+
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="Assets/js/login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Viajes Chile - Descubre la belleza natural de Chile. Tours por Atacama, Patagonia, Torres del Paine y más.">
+    <meta name="keywords" content="viajes chile, turismo, patagonia, atacama, torres del paine, tours">
+    <meta name="author" content="Viajes Chile">
+    <title>Viajes Chile | Descubre la Belleza Natural</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/img/viajes.svg">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/font.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navhijo">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#inicio">
+                <img src="assets/img/viajes.svg" alt="Viajes Chile Logo" width="45" height="45" class="me-2">
+                <span class="brand-text">Viajes<span class="brand-accent">Chile</span></span>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#quienessomos">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#destacados">Destinos</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary btn-nav" href="#contacto">
+                            <i class="fas fa-paper-plane me-2"></i>Contáctanos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header/Carrusel -->
+    <header id="inicio">
+        <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+            
+            <!-- Indicadores -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            </div>
+            
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <img src="assets/img/card1.jpg" class="d-block w-100" alt="Montañas Chile - Paisajes impresionantes">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <span class="badge-custom">🇨🇱 Destino #1 en Sudamérica</span>
+                        <h1 class="hero-title">Descubre la <span class="text-gradient">Magia</span> de Chile</h1>
+                        <p class="hero-subtitle">Paisajes que desafían la imaginación</p>
+                        <div class="hero-buttons">
+                            <a href="#destacados" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-compass me-2"></i>Explorar
+                            </a>
+                            <a href="#contacto" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-calendar-alt me-2"></i>Reservar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <img src="assets/img/carousel1.jpg" class="d-block w-100" alt="Desierto de Atacama">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <span class="badge-custom">🦙 Experiencia Única</span>
+                        <h1 class="hero-title">Desierto de <span class="text-gradient">Atacama</span></h1>
+                        <p class="hero-subtitle">El desierto más árido del mundo</p>
+                        <div class="hero-buttons">
+                            <a href="#destacados" class="btn btn-primary btn-lg">
+                                <i class="fas fa-mountain-sun me-2"></i>Descubrir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <img src="assets/img/card3.jpg" class="d-block w-100" alt="Laguna con Flamencos - Fauna única">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <span class="badge-custom">🦩 Fauna Nativa</span>
+                        <h1 class="hero-title">Conecta con la <span class="text-gradient">Naturaleza</span></h1>
+                        <p class="hero-subtitle">Descubre la biodiversidad chilena</p>
+                        <div class="hero-buttons">
+                            <a href="#destacados" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paw me-2"></i>Explorar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="carousel-item">
+                    <img src="assets/img/carousel3.jpg" class="d-block w-100" alt="Patagonia - Aventura sin límites">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <span class="badge-custom">️ Aventura Extrema</span>
+                        <h1 class="hero-title">Patagonia <span class="text-gradient">Chilena</span></h1>
+                        <p class="hero-subtitle">Aventura sin límites</p>
+                        <div class="hero-buttons">
+                            <a href="#destacados" class="btn btn-primary btn-lg">
+                                <i class="fas fa-hiking me-2"></i>Aventúrate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 5 -->
+                <div class="carousel-item">
+                    <img src="assets/img/card4.jpg" class="d-block w-100" alt="Bosque Valdiviano - Magia natural">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <span class="badge-custom"> Bosques Milenarios</span>
+                        <h1 class="hero-title">Bosques <span class="text-gradient">Ancestrales</span></h1>
+                        <p class="hero-subtitle">Magia natural en estado puro</p>
+                        <div class="hero-buttons">
+                            <a href="#destacados" class="btn btn-primary btn-lg">
+                                <i class="fas fa-tree me-2"></i>Descubrir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sección Quiénes Somos -->
+    <section id="quienessomos" class="section-padding">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">¿QUIÉNES SOMOS?</h2>
+                <div class="section-line"></div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/carousel2.jpg" class="card-img-top" alt="Experiencia - Más de 10 años">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h5 class="card-title">Experiencia</h5>
+                            <p class="card-text">Más de 10 años brindando experiencias únicas a viajeros de todo el mundo por los rincones más hermosos de Chile.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/carousel3.jpg" class="card-img-top" alt="Destinos Exclusivos">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <h5 class="card-title">Destinos Exclusivos</h5>
+                            <p class="card-text">Te llevamos a lugares que pocos conocen, desde el desierto de Atacama hasta la Patagonia chilena.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/carousel1.jpg" class="card-img-top" alt="Cultura y Naturaleza">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h5 class="card-title">Cultura y Naturaleza</h5>
+                            <p class="card-text">Vive la auténtica experiencia chilena combinando aventura, cultura y conexión con la naturaleza.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Línea divisoria -->
+    <div class="divider-line"></div>
+
+    <!-- Sección Destacados -->
+    <section id="destacados" class="section-padding bg-darker">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">DESTINOS DESTACADOS</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Los lugares más impresionantes te esperan</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card cardx h-100">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/card3.jpg" class="card-img-top" alt="San Pedro de Atacama">
+                            <div class="card-badge">
+                                <i class="fas fa-mountain-sun"></i>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">San Pedro de Atacama</h5>
+                            <p class="card-text">Geysers, lagunas y paisajes lunares te esperan.</p>
+                            <a href="#contacto" class="btn-link">Reservar <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card cardx h-100">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/card1.jpg" class="card-img-top" alt="Torres del Paine">
+                            <div class="card-badge">
+                                <i class="fas fa-person-hiking"></i>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Torres del Paine</h5>
+                            <p class="card-text">Uno de los parques más bellos del mundo.</p>
+                            <a href="#contacto" class="btn-link">Reservar <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card cardx h-100">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/card2.jpg" class="card-img-top" alt="Lagos del Sur">
+                            <div class="card-badge">
+                                <i class="fas fa-water"></i>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Lagos del Sur</h5>
+                            <p class="card-text">Aguas cristalinas y montañas nevadas.</p>
+                            <a href="#contacto" class="btn-link">Reservar <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card cardx h-100">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/card4.jpg" class="card-img-top" alt="Bosque Valdiviano">
+                            <div class="card-badge">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Bosque Valdiviano</h5>
+                            <p class="card-text">Selva templada única en el mundo.</p>
+                            <a href="#contacto" class="btn-link">Reservar <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Línea divisoria -->
+    <div class="divider-line"></div>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="section-padding">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">CONTACTO</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">¿Listo para tu próxima aventura? Escríbenos</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form id="contactForm" class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nombre" class="form-label">
+                                    <i class="fas fa-user me-2"></i>Nombre:
+                                </label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" 
+                                       placeholder="Tu nombre completo" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope me-2"></i>Email:
+                                </label>
+                                <input type="email" class="form-control" id="email" name="email" 
+                                       placeholder="tu@email.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="asunto" class="form-label">
+                                <i class="fas fa-tag me-2"></i>Asunto:
+                            </label>
+                            <input type="text" class="form-control" id="asunto" name="asunto" 
+                                   placeholder="¿En qué destino estás interesado?" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="mensaje" class="form-label">
+                                <i class="fas fa-comment-dots me-2"></i>Mensaje:
+                            </label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="5" 
+                                      placeholder="Cuéntanos sobre tu viaje soñado..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg btn-submit">
+                                <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center text-lg-start mb-3 mb-lg-0">
+                    <h3 id="fuentefoot" class="footer-brand">
+                        <img src="assets/img/viajes.svg" alt="Viajes Chile" width="35" class="me-2">
+                        VIAJES CHILE
+                    </h3>
+                </div>
+                
+                <div class="col-lg-4 text-center mb-3 mb-lg-0">
+                    <p class="footer-text mb-0">© 2026 Todos los derechos reservados</p>
+                </div>
+                
+                <div class="col-lg-4">
+                    <ul class="iconosfooter justify-content-center justify-content-lg-end mb-0">
+                        <li>
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="social-link" aria-label="Twitter">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="social-link" aria-label="WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

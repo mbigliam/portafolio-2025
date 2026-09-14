@@ -667,7 +667,7 @@
                                 <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/sismo-predict" target="_blank" class="project-link" title="Ver código">
                                     <i class="fab fa-github"></i>
                                 </a>
-                                <a href="https://sismo-predict.onrender.com/" target="_blank" class="project-link" title="Ver demo">
+                                <a href="https://portafolio-2025-production-22d2.up.railway.app/" target="_blank" class="project-link" title="Ver demo">
                                     <i class="fas fa-external-link-alt"></i>
                                 </a>
                             </div>
@@ -689,7 +689,7 @@
                             <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/sismo-predict" target="_blank" class="btn-project">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
-                            <a href="https://sismo-predict.onrender.com/" target="_blank" class="btn-project btn-demo">
+                            <a href=" https://portafolio-2025-production-22d2.up.railway.app/" target="_blank" class="btn-project btn-demo">
                                 <i class="fas fa-play"></i> Demo
                             </a>
                         </div>
@@ -852,11 +852,224 @@
         </div>
     </section>
 
+    <!-- CASO DE ESTUDIO - Local-First IA Security Gateway -->
+    <section id="case-study" class="section case-study-section">
+        <div class="container">
+            <div class="section-header reveal-item">
+                <span class="section-number">05.</span>
+                <h2 class="section-title">Caso de Estudio</h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Local-First IA Security Gateway con Control de Tráfico</p>
+            </div>
+
+            <div class="case-study-content">
+                <!-- Descripción -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>Descripción del Proyecto</h3>
+                        </div>
+                        <p>Arquitectura empresarial que controla y monitorea el tráfico de información desde equipos locales hacia servicios de IA (LLMs). Implementa un gateway local con Ollama (modelos privados: LLaMA 2, Mistral 7B) y Gemini API (con fallback seguro), permitiendo que empresas procesen datos sensibles sin exponerlos a infraestructura externa no controlada.</p>
+                    </div>
+                </div>
+
+                <!-- Desafío -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Desafío Principal</h3>
+                        </div>
+                        <p><strong>Seguridad & Compliance:</strong> Empresas de LATAM (Cencosud, Falabella, AFP) comparten información sensible con IA generativa pensando que son "herramientas de la empresa", pero olvidan regulaciones GDPR, HIPAA, PCI-DSS. No existe control sobre dónde viaja la información.</p>
+                        <p><strong>Problema específico:</strong> ChatGPT, Claude y Gemini mantienen logs de conversaciones. Un documento con PII, número de cliente, o datos financieros ingresados a una IA pública queda registrado en servidores externos.</p>
+                    </div>
+                </div>
+
+                <!-- Solución -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Solución Implementada</h3>
+                        </div>
+                        <p>Gateway local que actúa como proxy inteligente:</p>
+                        <div class="solution-components">
+                            <div class="component">
+                                <i class="fas fa-database"></i>
+                                <strong>Ollama Local</strong>
+                                <p>Modelos privados (LLaMA 2 7B, Mistral 7B) ejecutados en hardware local de la empresa</p>
+                            </div>
+                            <div class="component">
+                                <i class="fas fa-shield-alt"></i>
+                                <strong>Control de Tráfico</strong>
+                                <p>Middleware que inspecciona, sanitiza y clasifica datos antes de exponerlos a IA externa</p>
+                            </div>
+                            <div class="component">
+                                <i class="fas fa-key"></i>
+                                <strong>API Key Management</strong>
+                                <p>Solo requestos de Gemini aprobados usan credenciales (fallback para modelos no disponibles localmente)</p>
+                            </div>
+                            <div class="component">
+                                <i class="fas fa-chart-line"></i>
+                                <strong>Monitoreo & Auditoría</strong>
+                                <p>Logs locales de todas las transacciones, cumplimiento GDPR/HIPAA, reportes de compliance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tecnologías -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-cogs"></i>
+                            <h3>Stack Tecnológico</h3>
+                        </div>
+                        <div class="tech-stack">
+                            <div class="tech-category">
+                                <strong>Backend</strong>
+                                <span>Python 3.10+</span>
+                                <span>FastAPI</span>
+                                <span>AsyncIO</span>
+                            </div>
+                            <div class="tech-category">
+                                <strong>IA & Modelos</strong>
+                                <span>Ollama</span>
+                                <span>LLaMA 2 7B</span>
+                                <span>Mistral 7B</span>
+                                <span>Gemini API</span>
+                            </div>
+                            <div class="tech-category">
+                                <strong>Infraestructura</strong>
+                                <span>Docker</span>
+                                <span>Kubernetes</span>
+                                <span>PostgreSQL</span>
+                            </div>
+                            <div class="tech-category">
+                                <strong>Security & Monitoring</strong>
+                                <span>JWT Authentication</span>
+                                <span>Prometheus</span>
+                                <span>ELK Stack</span>
+                            </div>
+                            <div class="tech-category">
+                                <strong>Cloud</strong>
+                                <span>GCP</span>
+                                <span>Azure</span>
+                                <span>On-Premise</span>
+                            </div>
+                            <div class="tech-category">
+                                <strong>Compliance</strong>
+                                <span>GDPR</span>
+                                <span>HIPAA</span>
+                                <span>PCI-DSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aprendizajes -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-book"></i>
+                            <h3>Aprendizajes Clave</h3>
+                        </div>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>IA Local-First:</strong> Ollama permite ejecutar LLMs en hardware modesto (8GB RAM). LLaMA 2 7B es suficiente para 80% de casos empresariales.</li>
+                            <li><strong>Arquitectura defensiva:</strong> El gateway debe ser stateless y escalable horizontalmente. Kubernetes ofrece auto-scaling basado en carga de inferencia.</li>
+                            <li><strong>Compliance no es overhead:</strong> Registrar transacciones y exponer métricas de compliance genera valor directo (auditorías, reportes regulatorios).</li>
+                            <li><strong>Hybrid-approach:</strong> No es todo-local ni todo-cloud. Usar local para datos sensibles, cloud para análisis no-críticos.</li>
+                            <li><strong>Costo operativo:</strong> Marginal. Una empresa ahorra US$5K-15K/mes si deja de usar ChatGPT Enterprise + compliance tooling.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Métricas -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-chart-bar"></i>
+                            <h3>Métricas de Éxito</h3>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <div class="metric-value">100%</div>
+                                <div class="metric-label">Datos Sensibles Protegidos</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">80%</div>
+                                <div class="metric-label">Requests Resueltos Localmente</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">&lt;100ms</div>
+                                <div class="metric-label">Latencia P99</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">100%</div>
+                                <div class="metric-label">Cumplimiento GDPR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Habilidades Técnicas -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-user-tie"></i>
+                            <h3>Habilidades Demoradas</h3>
+                        </div>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Arquitectura Empresarial</span>
+                            <span class="skill-tag">Machine Learning Ops</span>
+                            <span class="skill-tag">Ciberseguridad</span>
+                            <span class="skill-tag">Cumplimiento Regulatorio</span>
+                            <span class="skill-tag">Infraestructura Cloud</span>
+                            <span class="skill-tag">Optimización de Costos</span>
+                            <span class="skill-tag">Integración de APIs</span>
+                            <span class="skill-tag">Pensamiento Estratégico</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Justificación de Impacto -->
+                <div class="case-study-card reveal-item">
+                    <div class="case-study-item">
+                        <div class="item-title">
+                            <i class="fas fa-star"></i>
+                            <h3>Justificación de Impacto</h3>
+                        </div>
+                        <p>Este proyecto demuestra capacidad para identificar problemas de negocio reales que la mayoría de empresas ignora. No es un "nice-to-have", es un <strong>riesgo existencial</strong> en la era de IA generativa.</p>
+                        <p><strong>Valor de negocio:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>Mitigación de riesgo regulatorio (multas GDPR: €20M o 4% ingresos)</li>
+                            <li>Reducción de costos operativos (IA pública es cara a escala)</li>
+                            <li>Diferencial competitivo para empresas LATAM que requieren compliance</li>
+                            <li>Oportunidad de servicios de consultoría (implementación, soporte, auditoría)</li>
+                        </ul>
+                        <p><strong>Portafolio:</strong> Demuestra pensamiento arquitectónico, no solo coding. Muestra que puedo ir de "problema empresarial" → "solución técnica diseñada" → "implementación escalable".</p>
+                    </div>
+                </div>
+
+                <!-- Acciones -->
+                <div class="case-study-actions reveal-item">
+                    <a href="https://github.com/mbigliam/portafolio-2025/tree/main/python/ia-security-gateway" target="_blank" class="btn btn-case-study">
+                        <i class="fab fa-github me-2"></i>Ver en GitHub
+                    </a>
+                    <a href="#projects" class="btn btn-case-study btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver a Proyectos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Formación -->
     <section id="education" class="section education-section">
         <div class="container">
             <div class="section-header reveal-item">
-                <span class="section-number">05.</span>
+                <span class="section-number">06.</span>
                 <h2 class="section-title">Formación & Certificaciones</h2>
                 <div class="section-line"></div>
                 <p class="section-subtitle">Educación y aprendizaje continuo</p>
@@ -942,7 +1155,7 @@
     <section id="contact" class="section contact-section">
         <div class="container">
             <div class="section-header reveal-item">
-                <span class="section-number">06.</span>
+                <span class="section-number">07.</span>
                 <h2 class="section-title">¿Hablamos?</h2>
                 <div class="section-line"></div>
                 <p class="section-subtitle">¿Tienes un proyecto en mente? Envíame un mensaje</p>
@@ -1023,7 +1236,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="mensaje">Mensaje</label>
-                                    <textarea id="mensaje" class="form-control" rows="5"
+                                    <textarea id="mensaje" class="form-control text-white" rows="5"
                                         placeholder="Escribe tu mensaje aquí..." required></textarea>
                                 </div>
                             </div>

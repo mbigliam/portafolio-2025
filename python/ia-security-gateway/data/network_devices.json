@@ -1,0 +1,22 @@
+{
+  "devices": {
+    "192.168.1.50": {
+      "ip_address": "192.168.1.50",
+      "hostname": "TEST-PC",
+      "first_seen": "2026-09-13T20:28:21.883551",
+      "last_seen": "2026-09-13T20:36:05.570892",
+      "total_requests": 2,
+      "total_blocks": 0,
+      "status": "monitored",
+      "risk_score": 10.0,
+      "violations": [],
+      "user_agents": [
+        "Testing"
+      ],
+      "ai_models_accessed": [
+        "unknown"
+      ],
+      "average_request_size_bytes": 0.0
+    }
+  }
+}

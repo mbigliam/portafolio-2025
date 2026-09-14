@@ -1,0 +1,30 @@
+{
+  "whitelist": {
+    "192.168.1.100": {
+      "ip_address": "192.168.1.100",
+      "action": "allow",
+      "description": "Mi laptop",
+      "added_by": "admin",
+      "timestamp": "2026-09-13T18:48:57.226395",
+      "reason": "APPROVED"
+    },
+    "10.0.0.1": {
+      "ip_address": "10.0.0.1",
+      "action": "allow",
+      "description": "Test IP",
+      "added_by": "dashboard",
+      "timestamp": "2026-09-13T20:46:53.436961",
+      "reason": "APPROVED"
+    }
+  },
+  "blacklist": {
+    "203.0.113.1": {
+      "ip_address": "203.0.113.1",
+      "action": "block",
+      "description": "Added via Dashboard",
+      "added_by": "dashboard",
+      "timestamp": "2026-09-13T20:46:55.500663",
+      "reason": "SECURITY_VIOLATION"
+    }
+  }
+}

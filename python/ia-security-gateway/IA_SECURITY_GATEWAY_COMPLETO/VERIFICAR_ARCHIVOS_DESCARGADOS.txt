@@ -1,0 +1,192 @@
+═══════════════════════════════════════════════════════════════════════════
+  VERIFICAR QUE LOS ARCHIVOS DESCARGADOS SON CORRECTOS
+═══════════════════════════════════════════════════════════════════════════
+
+DESCARGA ESTOS 3 ARCHIVOS PRIMERO:
+1. index_FIXED.html  (Frontend HTML - No emojis)
+2. app_FIXED.js      (Frontend JavaScript - Reescrito completo)
+3. Este verificador
+
+═══════════════════════════════════════════════════════════════════════════
+  PASO 1: VERIFICAR QUE DESCARGASTE LOS ARCHIVOS CORRECTOS
+═══════════════════════════════════════════════════════════════════════════
+
+Abre cada archivo con un editor de texto y verifica:
+
+✅ index_FIXED.html Debe contener:
+   Línea 1-7: <!DOCTYPE html> y <head>
+   Línea ~62: <h1>IA Security Gateway</h1>
+   Línea ~355: <div class="panel">
+   Línea ~360: <label for="promptInput">Enviar Prompt al Gateway:</label>
+   Línea ~362: <textarea id="promptInput" placeholder="Escribe tu pregunta aquí..."></textarea>
+   Línea ~371: <button class="button button-primary" id="sendBtn">Enviar al Gateway</button>
+   Línea ~472: <script src="app.js"></script>
+
+   IMPORTANTE: NO debe contener emojis en los botones
+   IMPORTANTE: Debe tener comentarios diciendo "<!-- Left Panel: Test Input -->"
+
+✅ app_FIXED.js Debe contener:
+   Línea 1-2: // IA Security Gateway - Frontend Application
+   Línea 4: const API_BASE = 'http://localhost:8000/api';
+   Línea 28-49: const elements = { promptInput: ..., tempSlider: ... }
+   Línea 52: document.addEventListener('DOMContentLoaded', function() {
+   Línea 64: elements.sendBtn.addEventListener('click', function() {
+   Línea 160: const response = await fetch(`${API_BASE}/generate`, {
+   Línea 395-396: console.log('IA Security Gateway - Frontend cargado');
+
+   IMPORTANTE: Debe tener DOMContentLoaded listener
+   IMPORTANTE: Debe tener console.log statements para debug
+
+═══════════════════════════════════════════════════════════════════════════
+  PASO 2: HACER BACKUP DE ARCHIVOS ORIGINALES (OPCIONAL PERO RECOMENDADO)
+═══════════════════════════════════════════════════════════════════════════
+
+En tu terminal, dentro de ia-security-gateway/:
+
+  mkdir -p public/backup
+  copy public\index.html public\backup\index.html.bak
+  copy public\app.js public\backup\app.js.bak
+
+═══════════════════════════════════════════════════════════════════════════
+  PASO 3: REEMPLAZAR ARCHIVOS
+═══════════════════════════════════════════════════════════════════════════
+
+En tu terminal, en la carpeta donde están los FIXED files:
+
+  OPCIÓN A - Desde carpeta de Downloads (recomendado):
+
+    copy index_FIXED.html C:\Users\Mbiglia\Downloads\ia-security-gateway\ia-security-gateway\public\index.html
+    copy app_FIXED.js C:\Users\Mbiglia\Downloads\ia-security-gateway\ia-security-gateway\public\app.js
+
+  OPCIÓN B - Manual (explorador):
+
+    1. Abre carpeta: C:\Users\Mbiglia\Downloads\ia-security-gateway\ia-security-gateway\public\
+    2. Copia index_FIXED.html -> pega como "index.html"
+    3. Copia app_FIXED.js -> pega como "app.js"
+    4. Cuando pregunte "reemplazar archivos existentes?", clickea "Sí"
+
+═══════════════════════════════════════════════════════════════════════════
+  PASO 4: VERIFICAR QUE LOS ARCHIVOS FUERON REEMPLAZADOS
+═══════════════════════════════════════════════════════════════════════════
+
+En terminal:
+
+  cd C:\Users\Mbiglia\Downloads\ia-security-gateway\ia-security-gateway
+
+  Verifica index.html contiene los elementos correctos:
+  findstr /C:"id=\"promptInput\"" public\index.html
+  → Debería devolver: <textarea id="promptInput" ...
+
+  Verifica app.js tiene configuración correcta:
+  findstr /C:"API_BASE = 'http" public\app.js
+  → Debería devolver: const API_BASE = 'http://localhost:8000/api';
+
+  Verifica que app.js tiene DOMContentLoaded:
+  findstr /C:"DOMContentLoaded" public\app.js
+  → Debería devolver: document.addEventListener('DOMContentLoaded', function() {
+
+  Si todos los findstr devuelven resultados: ✅ CORRECTO
+  Si alguno NO devuelve resultados: ❌ FALLO - Vuelve a Paso 3
+
+═══════════════════════════════════════════════════════════════════════════
+  PASO 5: INICIAR EL SERVIDOR
+═══════════════════════════════════════════════════════════════════════════
+
+  1. Abre terminal en el directorio ia-security-gateway
+
+  2. Detén cualquier instancia previa (Ctrl+C si está corriendo)
+
+  3. Inicia con:
+     py -3.12 -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+  4. Deberías ver en terminal:
+     Uvicorn running on http://0.0.0.0:8000
+     Application startup complete
+
+═══════════════════════════════════════════════════════════════════════════
+  PASO 6: LIMPIAR CACHÉ DEL NAVEGADOR Y PROBAR
+═══════════════════════════════════════════════════════════════════════════
+
+  1. CIERRA EL NAVEGADOR COMPLETAMENTE
+
+  2. ABRE NUEVO NAVEGADOR EN MODO INCÓGNITO
+     Ctrl+Shift+N (Windows/Linux) o Cmd+Shift+N (Mac)
+
+  3. VE A: http://localhost:8000
+
+  4. ABRE CONSOLA: F12 o Ctrl+Shift+I
+
+  5. EN CONSOLA DEBERÍAS VER:
+     IA Security Gateway - Frontend cargado
+     API Base: http://localhost:8000/api
+     DOM Cargado - Inicializando Gateway...
+     Gateway conectado
+     Estadísticas actualizadas
+
+  6. EN PANTALLA DEBERÍAS VER:
+     - Encabezado "IA Security Gateway"
+     - Punto VERDE (conectado) arriba a la derecha
+     - Botón "Enviar al Gateway"
+     - Sección "Estadísticas en Tiempo Real"
+     - Ejemplos de prueba abajo
+
+═══════════════════════════════════════════════════════════════════════════
+  PASO 7: PROBAR FUNCIONALIDAD BÁSICA
+═══════════════════════════════════════════════════════════════════════════
+
+  1. Haz clic en: "Datos Públicos (Permitido)" (botón verde en ejemplos)
+
+  2. EN CONSOLA (F12) deberías ver:
+     Ejemplo cargado: Datos Públicos
+     Enviando request: {...}
+     Response status: 200
+     Response data: {...}
+
+  3. EN PANTALLA deberías ver:
+     - "Respuesta Exitosa (200 OK)"
+     - Clasificación: PUBLIC
+     - Tiempo de generación
+     - Modelo usado
+
+  4. SI ESTO FUNCIONA: ✅ SISTEMA OPERATIVO
+
+═══════════════════════════════════════════════════════════════════════════
+  PROBLEMAS COMUNES Y SOLUCIONES
+═══════════════════════════════════════════════════════════════════════════
+
+❌ PROBLEMA: Todavía veo "Desconectado" (punto rojo)
+   SOLUCIÓN:
+   - Backend no está respondiendo
+   - En otra terminal ejecuta: py -3.12 -m uvicorn app.main:app --reload
+   - Verifica que aparece: "Application startup complete"
+
+❌ PROBLEMA: Botones no hacen nada
+   SOLUCIÓN:
+   - Abre Consola (F12)
+   - ¿Ves errores en rojo?
+   - ¿Ves "IA Security Gateway - Frontend cargado"?
+   - Si no: Abre archivo público/app.js en editor y verifica que contiene
+     "DOMContentLoaded" en línea 52
+
+❌ PROBLEMA: Consola muestra errores de CORS
+   SOLUCIÓN:
+   - Los archivos pueden no haber sido reemplazados correctamente
+   - Vuelve a Paso 3 y reemplaza nuevamente
+
+❌ PROBLEMA: La interfaz se ve vacía o sin estilos
+   SOLUCIÓN:
+   - Caché del navegador tiene versión antigua
+   - Presiona Ctrl+Shift+Delete
+   - Selecciona "Todas las cookies y datos del sitio"
+   - Recarga Ctrl+F5
+
+═══════════════════════════════════════════════════════════════════════════
+  SIGUIENTE PASO DESPUÉS DE VERIFICAR
+═══════════════════════════════════════════════════════════════════════════
+
+Si todo funciona:
+1. Ejecuta: py -3.12 VERIFICAR_INSTALACION.py
+2. Lee: GUIA_TESTING_COMPLETA.md
+3. Prueba todos los ejemplos (Público, Sensible, Crítico, Exfiltración)
+
+¡Contactame si hay problemas!

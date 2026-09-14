@@ -1,0 +1,69 @@
+INSTRUCCIONES PARA REEMPLAZAR ARCHIVOS - IA SECURITY GATEWAY
+===========================================================
+
+ARCHIVOS A REEMPLAZAR:
+1. index_FIXED.html  →  Copia a: app/public/index.html
+2. app_FIXED.js      →  Copia a: app/public/app.js
+
+PASOS RÁPIDOS:
+
+1. Descarga los archivos de salida:
+   - index_FIXED.html
+   - app_FIXED.js
+
+2. Abre terminal en tu proyecto:
+   cd C:\Users\Mbiglia\Downloads\ia-security-gateway\ia-security-gateway
+
+3. Detén el servidor si está corriendo (Ctrl+C)
+
+4. Reemplaza los archivos:
+
+   OPCIÓN A - Desde Command Prompt (Windows):
+   copy index_FIXED.html public\index.html
+   copy app_FIXED.js public\app.js
+
+   OPCIÓN B - Manual (Explorador):
+   - Abre carpeta: app\public\
+   - Reemplaza index.html con index_FIXED.html
+   - Reemplaza app.js con app_FIXED.js
+
+5. Inicia el servidor nuevamente:
+   py -3.12 -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+6. Abre en navegador:
+   http://localhost:8000
+
+CAMBIOS EN ESTOS ARCHIVOS:
+✓ REMOVIDOS todos los emojis de botones (solo texto claro)
+✓ REESCRITO JavaScript completamente
+✓ Mejorado manejo de errores
+✓ Añadido logging en consola para debug
+✓ Simplificado y hecho robusto
+✓ Event listeners verificados
+✓ Rutas de API correctas (http://localhost:8000/api)
+
+TESTING DESPUÉS DE REEMPLAZAR:
+
+1. Abre http://localhost:8000 en navegador
+2. Abre Consola (F12)
+3. Verifica: "IA Security Gateway - Frontend cargado"
+4. Intenta con "Datos Públicos (Permitido)" botón de ejemplo
+5. Deberías ver respuesta en pocos segundos
+
+PROBLEMAS Y SOLUCIONES:
+
+Si ves "Desconectado" arriba a la derecha:
+→ El backend no está corriendo
+→ Abre otra terminal y corre: py -3.12 -m uvicorn app.main:app --reload
+
+Si botones siguen sin responder:
+→ Abre Consola (F12) y verifica errores
+→ Revisa que API_BASE = 'http://localhost:8000/api' sea correcto
+→ Verifica que el backend está en puerto 8000
+
+Si la interfaz se ve vacía:
+→ F5 (refresh) varias veces
+→ Ctrl+Shift+Supr (limpiar caché)
+→ Verifica que index.html se copió a public/
+
+¡Eso es todo! Los archivos están listos para usar.

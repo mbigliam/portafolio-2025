@@ -1,0 +1,353 @@
+# IA Security Gateway - Professional Security API Routes
+# Complete API for IP control, file analysis, and network tracking
+
+from fastapi import APIRouter, File, UploadFile, Query, HTTPException, Request
+from fastapi.responses import JSONResponse
+from typing import List, Optional
+from datetime import datetime
+import base64
+
+# Import security modules
+from app.security.ip_control import ip_controller, IPAction
+from app.security.file_analyzer import file_analyzer
+from app.security.network_tracking import network_tracker, DeviceStatus, ViolationType
+
+router = APIRouter(prefix="/api/security", tags=["security"])
+
+# ============================================================================
+# IP CONTROL ENDPOINTS
+# ============================================================================
+
+@router.get("/ip/rules")
+async def get_ip_rules():
+    """Get all IP whitelist and blacklist rules"""
+    return {
+        "timestamp": datetime.now().isoformat(),
+        "rules": ip_controller.get_rules(),
+        "stats": ip_controller.get_stats()
+    }
+
+@router.post("/ip/whitelist/add")
+async def add_ip_whitelist(
+    ip_address: str = Query(..., description="IP address to whitelist"),
+    description: str = Query(..., description="Reason for whitelisting"),
+    added_by: str = Query("admin", description="User adding the rule")
+):
+    """Add IP to whitelist (allow access)"""
+    success, message = ip_controller.add_whitelist(ip_address, description, added_by)
+    return {
+        "success": success,
+        "message": message,
+        "action": "whitelist_added",
+        "timestamp": datetime.now().isoformat()
+    }
+
+@router.post("/ip/blacklist/add")
+async def add_ip_blacklist(
+    ip_address: str = Query(..., description="IP address to block"),
+    description: str = Query(..., description="Reason for blocking"),
+    reason: str = Query("SECURITY_VIOLATION", description="Violation reason"),
+    added_by: str = Query("admin", description="User adding the rule")
+):
+    """Add IP to blacklist (block access completely)"""
+    success, message = ip_controller.add_blacklist(ip_address, description, added_by, reason)
+    return {
+        "success": success,
+        "message": message,
+        "action": "blacklist_added",
+        "ip_address": ip_address,
+        "reason": reason,
+        "timestamp": datetime.now().isoformat()
+    }
+
+@router.delete("/ip/rules/{ip_address}")
+async def remove_ip_rule(ip_address: str):
+    """Remove an IP rule (whitelist or blacklist)"""
+    success, message = ip_controller.remove_rule(ip_address)
+    return {
+        "success": success,
+        "message": message,
+        "timestamp": datetime.now().isoformat()
+    }
+
+@router.get("/ip/check/{ip_address}")
+async def check_ip_access(ip_address: str):
+    """Check if an IP is allowed to access IA services"""
+    is_allowed, message = ip_controller.check_access(ip_address)
+    return {
+        "ip_address": ip_address,
+        "is_allowed": is_allowed,
+        "status": "ALLOWED" if is_allowed else "BLOCKED",
+        "message": message,
+        "timestamp": datetime.now().isoformat()
+    }
+
+# ============================================================================
+# FILE ANALYSIS ENDPOINTS
+# ============================================================================
+
+@router.post("/analyze/file")
+async def analyze_file(
+    file: UploadFile = File(...),
+    client_ip: str = Query("unknown", description="Client IP address")
+):
+    """Analyze a file for security threats before sending to IA"""
+    try:
+        # Read file content
+        content = await file.read()
+
+        # Attempt to decode as text (for document analysis)
+        try:
+            text_content = content.decode('utf-8')
+        except:
+            text_content = base64.b64encode(content).decode('utf-8')
+
+        # Perform analysis
+        result = file_analyzer.analyze_file(
+            filename=file.filename or "unknown",
+            content=text_content[:10000],  # Limit to first 10KB for analysis
+            file_size=len(content),
+            client_ip=client_ip
+        )
+
+        return {
+            "filename": result.filename,
+            "file_type": result.file_type,
+            "mime_type": result.mime_type,
+            "file_size_bytes": result.file_size_bytes,
+            "risk_level": result.risk_level.value,
+            "is_allowed": result.is_allowed,
+            "reason": result.reason,
+            "detected_patterns": result.detected_patterns,
+            "has_credentials": result.has_credentials,
+            "has_personal_data": result.has_personal_data,
+            "has_financial_data": result.has_financial_data,
+            "has_trade_secrets": result.has_trade_secrets,
+            "timestamp": result.timestamp
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"File analysis error: {str(e)}")
+
+@router.get("/analyze/summary")
+async def get_file_analysis_summary():
+    """Get summary of file analysis activity"""
+    return {
+        "summary": file_analyzer.get_analysis_summary(),
+        "timestamp": datetime.now().isoformat()
+    }
+
+# ============================================================================
+# NETWORK TRACKING ENDPOINTS
+# ============================================================================
+
+@router.post("/network/track")
+async def track_device_request(
+    client_ip: str = Query(...),
+    hostname: str = Query("unknown"),
+    user_agent: str = Query("unknown"),
+    model_accessed: str = Query("unknown"),
+    request_size: int = Query(0)
+):
+    """Track a device request on the network"""
+    device = network_tracker.track_request(
+        client_ip=client_ip,
+        hostname=hostname,
+        user_agent=user_agent,
+        model_accessed=model_accessed,
+        request_size=request_size
+    )
+
+    return {
+        "ip_address": device.ip_address,
+        "total_requests": device.total_requests,
+        "status": device.status.value,
+        "risk_score": device.risk_score,
+        "timestamp": datetime.now().isoformat()
+    }
+
+@router.post("/network/record-block")
+async def record_blocked_request(client_ip: str = Query(...)):
+    """Record a blocked request from a device"""
+    device = network_tracker.record_block(client_ip)
+
+    if device:
+        return {
+            "ip_address": device.ip_address,
+            "total_blocks": device.total_blocks,
+            "block_rate_percent": (device.total_blocks / device.total_requests * 100) if device.total_requests > 0 else 0,
+            "status": device.status.value,
+            "risk_score": device.risk_score,
+            "timestamp": datetime.now().isoformat()
+        }
+    else:
+        raise HTTPException(status_code=404, detail="Device not found")
+
+@router.get("/network/device/{ip_address}")
+async def get_device_profile(ip_address: str):
+    """Get detailed profile of a device"""
+    profile = network_tracker.get_device_profile(ip_address)
+
+    if not profile:
+        raise HTTPException(status_code=404, detail="Device not tracked yet")
+
+    return profile
+
+@router.get("/network/summary")
+async def get_network_summary():
+    """Get summary of network activity and security"""
+    return {
+        "summary": network_tracker.get_network_summary(),
+        "timestamp": datetime.now().isoformat()
+    }
+
+@router.get("/network/devices")
+async def get_all_devices(
+    status: Optional[str] = Query(None, description="Filter by status: trusted, monitored, suspected, blocked"),
+    min_risk_score: float = Query(0, description="Minimum risk score filter")
+):
+    """Get list of all tracked devices"""
+    devices = []
+
+    for ip, device in network_tracker.devices.items():
+        # Apply filters
+        if status and device.status.value != status:
+            continue
+        if device.risk_score < min_risk_score:
+            continue
+
+        devices.append({
+            "ip_address": device.ip_address,
+            "hostname": device.hostname,
+            "total_requests": device.total_requests,
+            "total_blocks": device.total_blocks,
+            "status": device.status.value,
+            "risk_score": device.risk_score,
+            "first_seen": device.first_seen,
+            "last_seen": device.last_seen
+        })
+
+    return {
+        "devices": devices,
+        "total": len(devices),
+        "timestamp": datetime.now().isoformat()
+    }
+
+@router.get("/network/violations")
+async def get_security_violations(
+    limit: int = Query(20, description="Maximum violations to return"),
+    resolved: Optional[bool] = Query(None, description="Filter by resolved status")
+):
+    """Get recent security violations"""
+    violations = []
+
+    for v in network_tracker.violations[-limit:]:
+        if resolved is not None and v.resolved != resolved:
+            continue
+
+        violations.append({
+            "device_ip": v.device_ip,
+            "violation_type": v.violation_type.value,
+            "severity": v.severity,
+            "description": v.description,
+            "timestamp": v.timestamp,
+            "resolved": v.resolved
+        })
+
+    return {
+        "violations": violations,
+        "total": len(violations),
+        "timestamp": datetime.now().isoformat()
+    }
+
+@router.post("/network/violation/report")
+async def report_violation(
+    client_ip: str = Query(...),
+    violation_type: str = Query(...),
+    severity: str = Query("medium"),
+    description: str = Query(...)
+):
+    """Manually report a security violation"""
+    try:
+        vtype = ViolationType[violation_type.upper()]
+        network_tracker.record_violation(
+            device_ip=client_ip,
+            violation_type=vtype,
+            severity=severity,
+            description=description,
+            evidence={"manual_report": True}
+        )
+        return {
+            "success": True,
+            "message": f"Violation reported for {client_ip}",
+            "timestamp": datetime.now().isoformat()
+        }
+    except KeyError:
+        raise HTTPException(status_code=400, detail=f"Unknown violation type: {violation_type}")
+
+# ============================================================================
+# INTEGRATED SECURITY CHECK
+# ============================================================================
+
+@router.post("/check-comprehensive")
+async def comprehensive_security_check(
+    client_ip: str = Query(...),
+    file: Optional[UploadFile] = File(None)
+):
+    """Perform comprehensive security check (IP + File Analysis)"""
+    results = {}
+
+    # Check IP access
+    is_ip_allowed, ip_message = ip_controller.check_access(client_ip)
+    results['ip_check'] = {
+        'allowed': is_ip_allowed,
+        'message': ip_message
+    }
+
+    # If IP is blocked, stop here
+    if not is_ip_allowed:
+        return {
+            "overall_allowed": False,
+            "reason": "IP is blocked - access denied",
+            "checks": results,
+            "timestamp": datetime.now().isoformat()
+        }
+
+    # Analyze file if provided
+    if file:
+        try:
+            content = await file.read()
+            try:
+                text_content = content.decode('utf-8')
+            except:
+                text_content = base64.b64encode(content).decode('utf-8')
+
+            file_result = file_analyzer.analyze_file(
+                filename=file.filename or "unknown",
+                content=text_content[:10000],
+                file_size=len(content),
+                client_ip=client_ip
+            )
+
+            results['file_check'] = {
+                'allowed': file_result.is_allowed,
+                'reason': file_result.reason,
+                'risk_level': file_result.risk_level.value,
+                'has_credentials': file_result.has_credentials,
+                'has_personal_data': file_result.has_personal_data,
+                'has_financial_data': file_result.has_financial_data
+            }
+
+            overall_allowed = is_ip_allowed and file_result.is_allowed
+        except Exception as e:
+            results['file_check'] = {'error': str(e)}
+            overall_allowed = False
+    else:
+        overall_allowed = is_ip_allowed
+
+    return {
+        "overall_allowed": overall_allowed,
+        "reason": "Passed all security checks" if overall_allowed else "Failed security checks",
+        "checks": results,
+        "timestamp": datetime.now().isoformat()
+    }

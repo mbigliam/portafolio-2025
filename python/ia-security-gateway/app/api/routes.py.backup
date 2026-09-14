@@ -1,0 +1,306 @@
+"""
+API Routes
+Defines all endpoints for the IA Security Gateway
+"""
+from fastapi import APIRouter, HTTPException, Depends, Header, Request
+from datetime import datetime, timedelta
+from typing import Optional
+import logging
+
+from app.models.schemas import (
+    GenerateRequest, GenerateResponse,
+    ChatRequest, ChatResponse,
+    ComplianceReport, HealthStatus,
+    ErrorResponse, TrafficStats
+)
+from app.core.config import settings
+from app.core.security import verify_token, sanitize_input, classify_data_sensitivity
+from app.services.ollama_service import ollama_service
+from app.services.traffic_control import TrafficController
+from app.services.compliance import ComplianceLogger
+
+logger = logging.getLogger(__name__)
+
+# Initialize services
+traffic_controller = TrafficController()
+compliance_logger = ComplianceLogger()
+
+# Create router
+router = APIRouter(prefix="/api", tags=["AI Gateway"])
+
+
+def get_client_id(request: Request, authorization: Optional[str] = Header(None)) -> str:
+    """Extract client ID from request or token"""
+    if authorization and authorization.startswith("Bearer "):
+        try:
+            token = authorization.split(" ")[1]
+            payload = verify_token(token)
+            return payload.get("sub", request.client.host)
+        except Exception:
+            pass
+    return request.client.host
+
+
+from app.services.dlp_engine import analizar_payload # <-- Importar
+
+@router.post("/generate", response_model=GenerateResponse)
+async def generate_text(
+    request: GenerateRequest,
+    client_request: Request,
+    client_id: str = Depends(get_client_id)
+):
+    """
+    Generate text using local Ollama LLM
+
+    Features:
+    - Rate limiting per client
+    - Data sensitivity detection
+    - Compliance logging
+    - No external API calls - all local
+    """
+    try:
+        # Check rate limiting
+        
+        allowed, stats = traffic_controller.check_rate_limit(
+            client_id,
+            settings.RATE_LIMIT_REQUESTS,
+            settings.RATE_LIMIT_WINDOW
+        ) # --- NUEVO: ANÁLISIS DLP PROFUNDO ---
+        analisis_dlp = await analizar_payload(request.prompt)
+
+        if not allowed:
+            compliance_logger.log_security_event(
+                event_type="RATE_LIMIT_EXCEEDED",
+                severity="MEDIUM",
+                description=f"Client {client_id} exceeded rate limit"
+            )
+            raise HTTPException(
+                status_code=429,
+                detail=f"Rate limit exceeded: {stats['current']}/{stats['limit']} requests"
+            )
+
+        # Sanitize input
+        safe_prompt = sanitize_input(request.prompt)
+
+        # Classify data sensitivity
+        sensitivity = classify_data_sensitivity(request.prompt)
+
+        # Log the request for compliance
+        compliance_logger.log_data_classification(
+            request.prompt,
+            sensitivity
+        )
+
+        # Check for data exfiltration
+        is_suspicious, reason = traffic_controller.detect_data_exfiltration(
+            request.prompt,
+            "local_ollama"
+        )
+
+        if is_suspicious:
+            compliance_logger.log_security_event(
+                event_type="SUSPICIOUS_PATTERN_DETECTED",
+                severity="HIGH",
+                description=reason
+            )
+            if sensitivity == "critical":
+                raise HTTPException(
+                    status_code=400,
+                    detail="Request contains sensitive data patterns"
+                )
+
+        # Generate using local Ollama
+        start_time = datetime.now()
+        response = await ollama_service.generate_local(safe_prompt)
+        generation_time = (datetime.now() - start_time).total_seconds() * 1000
+
+        if response is None:
+            compliance_logger.log_error(
+                error_type="GENERATION_FAILED",
+                status_code=503,
+                detail="Local Ollama generation failed"
+            )
+            raise HTTPException(
+                status_code=503,
+                detail="Local LLM service temporarily unavailable"
+            )
+
+        # Log successful response
+        compliance_logger.log_response(200, generation_time)
+
+        return GenerateResponse(
+            success=True,
+            response=response,
+            llm_model_used=ollama_service.model,
+            generation_time_ms=round(generation_time, 2),
+            data_sensitivity=sensitivity,
+            timestamp=datetime.now()
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Generation error: {e}")
+        compliance_logger.log_error(
+            error_type="GENERATION_ERROR",
+            status_code=500,
+            detail=str(e)
+        )
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@router.post("/chat", response_model=ChatResponse)
+async def chat(
+    request: ChatRequest,
+    client_request: Request,
+    client_id: str = Depends(get_client_id)
+):
+    """
+    Chat interface with conversation history
+
+    Features:
+    - Session management
+    - Message history tracking
+    - Rate limiting
+    - Compliance logging
+    """
+    try:
+        # Check rate limiting
+        allowed, stats = traffic_controller.check_rate_limit(
+            client_id,
+            settings.RATE_LIMIT_REQUESTS * 2,  # Higher limit for chat
+            settings.RATE_LIMIT_WINDOW
+        )
+
+        if not allowed:
+            raise HTTPException(status_code=429, detail="Rate limit exceeded")
+
+        # Build conversation context
+        context = ""
+        for msg in request.messages:
+            role = msg.role.upper()
+            content = sanitize_input(msg.content)
+            context += f"{role}: {content}\n"
+
+        # Classify combined sensitivity
+        sensitivity = classify_data_sensitivity(context)
+        compliance_logger.log_data_classification(context, sensitivity)
+
+        # Generate response
+        start_time = datetime.now()
+        response = await ollama_service.generate_local(context)
+        generation_time = (datetime.now() - start_time).total_seconds() * 1000
+
+        if response is None:
+            raise HTTPException(status_code=503, detail="LLM service unavailable")
+
+        compliance_logger.log_response(200, generation_time)
+
+        return ChatResponse(
+            success=True,
+            response=response,
+            session_id=request.session_id or "default",
+            messages_processed=len(request.messages),
+            timestamp=datetime.now()
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Chat error: {e}")
+        compliance_logger.log_error("CHAT_ERROR", 500, str(e))
+        raise HTTPException(status_code=500, detail="Chat error")
+
+
+@router.get("/compliance", response_model=ComplianceReport)
+async def get_compliance_report(
+    client_id: str = Depends(get_client_id)
+):
+    """
+    Get comprehensive compliance and audit report
+
+    Returns:
+    - GDPR/HIPAA/PCI-DSS compliance status
+    - Audit trail statistics
+    - Traffic control metrics
+    - Data retention policy
+    """
+    try:
+        compliance_data = compliance_logger.generate_compliance_report()
+        traffic_stats = traffic_controller.get_stats()
+
+        return ComplianceReport(
+            report_date=datetime.now(),
+            gdpr_enabled=compliance_data["gdpr_enabled"],
+            hipaa_enabled=compliance_data["hipaa_enabled"],
+            pci_dss_enabled=compliance_data["pci_dss_enabled"],
+            data_retention_days=compliance_data["data_retention_days"],
+            log_sensitive_data=compliance_data["log_sensitive_data"],
+            audit_entries=compliance_data["audit_entries"],
+            status=compliance_data["status"],
+            allowed_requests=traffic_stats["allowed_requests"],
+            blocked_requests=traffic_stats["blocked_requests"],
+            active_clients=traffic_stats["active_clients"]
+        )
+    except Exception as e:
+        logger.error(f"Compliance report error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate compliance report")
+
+
+@router.get("/status", response_model=HealthStatus)
+async def get_status():
+    """
+    Get gateway operational status
+
+    Returns:
+    - Overall system status
+    - Ollama availability
+    - Version information
+    - Uptime metrics
+    """
+    try:
+        ollama_available = await ollama_service.health_check()
+
+        return HealthStatus(
+            status="operational" if ollama_available else "degraded",
+            ollama_available=ollama_available,
+            version="1.0.0",
+            timestamp=datetime.now(),
+            uptime_seconds=0  # Would require tracking in production
+        )
+    except Exception as e:
+        logger.error(f"Status check error: {e}")
+        return HealthStatus(
+            status="error",
+            ollama_available=False,
+            version="1.0.0",
+            timestamp=datetime.now(),
+            uptime_seconds=0
+        )
+
+
+@router.get("/traffic-stats", response_model=TrafficStats)
+async def get_traffic_stats():
+    """
+    Get traffic control statistics
+
+    Returns:
+    - Request counts (allowed/blocked)
+    - Active clients
+    - Block rate percentage
+    """
+    try:
+        stats = traffic_controller.get_stats()
+        total = stats["allowed_requests"] + stats["blocked_requests"]
+        block_rate = (stats["blocked_requests"] / total * 100) if total > 0 else 0
+
+        return TrafficStats(
+            allowed_requests=stats["allowed_requests"],
+            blocked_requests=stats["blocked_requests"],
+            active_clients=stats["active_clients"],
+            block_rate_percent=round(block_rate, 2),
+            timestamp=datetime.now()
+        )
+    except Exception as e:
+        logger.error(f"Traffic stats error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to retrieve traffic stats")
